@@ -1,0 +1,22 @@
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Project specific exclusions
+data/raw/
+data/processed/
+outputs/*.csv
+outputs/*.json
+
+# Operating system / IDE files
+.DS_Store
+.zed/
+
+# VS Code files for Mehrnia
+.vscode/
+*.code-workspace
