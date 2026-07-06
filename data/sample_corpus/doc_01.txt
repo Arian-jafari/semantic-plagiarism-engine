@@ -1,0 +1,10 @@
+Machine learning is a branch of artificial intelligence that enables computers to learn from data without being explicitly programmed.
+Algorithms improve automatically through experience and build models based on sample data, known as training data.
+Supervised learning uses labeled datasets to train algorithms to classify data or predict outcomes accurately.
+Common supervised learning algorithms include linear regression, logistic regression, decision trees, and support vector machines.
+Neural networks are inspired by the human brain and consist of layers of interconnected nodes that process information.
+Deep learning is a subset of machine learning that uses neural networks with many layers to analyze various factors of data.
+Training a deep learning model requires large amounts of data and significant computational resources.
+Overfitting occurs when a model learns the training data too well and fails to generalize to new unseen data.
+Regularization techniques such as dropout and L2 penalty help prevent overfitting in neural networks.
+The performance of machine learning models is evaluated using metrics such as accuracy, precision, recall, and F1 score.
