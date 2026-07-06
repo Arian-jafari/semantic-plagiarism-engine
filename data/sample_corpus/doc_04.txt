@@ -1,0 +1,10 @@
+A relational database organizes data into tables consisting of rows and columns, where each row represents a unique record.
+SQL, which stands for Structured Query Language, is the standard language used to interact with relational databases.
+Database normalization is the process of structuring a database to reduce redundancy and improve data integrity.
+Indexes are data structures that speed up the retrieval of records at the cost of additional storage space.
+A primary key uniquely identifies each record in a table, while a foreign key links two related tables together.
+Transactions in a database must follow the ACID properties: Atomicity, Consistency, Isolation, and Durability.
+A database management system provides tools for storing, retrieving, and managing data efficiently and securely.
+Query optimization is the process of finding the most efficient execution plan for a given database query.
+Joins are used in SQL to combine rows from two or more tables based on a shared column between them.
+Backup and recovery strategies are critical for protecting data against hardware failures and accidental data loss.

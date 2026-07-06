@@ -9,9 +9,8 @@ from __future__ import annotations
 
 import hashlib
 import random
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Iterable
-
 
 MAX_HASH = (1 << 61) - 1
 PRIME = (1 << 61) - 1
@@ -45,6 +44,9 @@ class MinHasher:
 
     num_hashes: int = 128
     seed: int = 42
+    _coefficients: tuple[tuple[int, int], ...] = field(
+        default=(), init=False, repr=False, compare=False
+    )
 
     def __post_init__(self) -> None:
         if self.num_hashes <= 0:

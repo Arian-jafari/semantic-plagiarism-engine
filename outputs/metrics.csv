@@ -1,2 +1,0 @@
-method,threshold,pairs,seconds,precision,recall,f1,accuracy,true_positive,false_positive,true_negative,false_negative
-simhash,0.75,1000,0.102412,0.558282,0.239474,0.335175,0.639000,91,72,548,289

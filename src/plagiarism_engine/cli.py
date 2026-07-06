@@ -40,7 +40,9 @@ def _write_json(path: str | Path, payload: dict[str, Any]) -> None:
     )
 
 
-def _write_csv(path: str | Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
+def _write_csv(
+    path: str | Path, rows: list[dict[str, Any]], fieldnames: list[str]
+) -> None:
     output_path = Path(path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("w", encoding="utf-8", newline="") as handle:
@@ -208,7 +210,9 @@ def handle_pairs(args: argparse.Namespace) -> None:
     rows: list[dict[str, Any]] = []
     labels: list[int] = []
     predictions: list[int] = []
-    minhasher = MinHasher(num_hashes=args.num_hashes) if args.method == "minhash" else None
+    minhasher = (
+        MinHasher(num_hashes=args.num_hashes) if args.method == "minhash" else None
+    )
     idf = None
     if args.method == "simhash":
         token_documents = []
@@ -294,7 +298,11 @@ def handle_preprocess(args: argparse.Namespace) -> None:
             missing_columns = ", ".join(sorted(missing))
             raise ValueError(f"Missing required CSV columns: {missing_columns}")
 
-        base_fields = [field for field in ["id", "qid1", "qid2"] if field in (reader.fieldnames or [])]
+        base_fields = [
+            field
+            for field in ["id", "qid1", "qid2"]
+            if field in (reader.fieldnames or [])
+        ]
         fieldnames = [
             *base_fields,
             args.text_col_a,
@@ -314,15 +322,22 @@ def handle_preprocess(args: argparse.Namespace) -> None:
             for row in reader:
                 clean_a = preprocessed_text(
                     row.get(args.text_col_a, ""),
-                    remove_stops=not args.keep_stopwords,
+                    remove_stops=False,
                 )
                 clean_b = preprocessed_text(
+                    row.get(args.text_col_b, ""),
+                    remove_stops=False,
+                )
+                tokens_a = preprocessed_text(
+                    row.get(args.text_col_a, ""),
+                    remove_stops=not args.keep_stopwords,
+                )
+                tokens_b = preprocessed_text(
                     row.get(args.text_col_b, ""),
                     remove_stops=not args.keep_stopwords,
                 )
                 output_row: dict[str, Any] = {
-                    field: row.get(field, "")
-                    for field in base_fields
+                    field: row.get(field, "") for field in base_fields
                 }
                 output_row.update(
                     {
@@ -330,8 +345,8 @@ def handle_preprocess(args: argparse.Namespace) -> None:
                         args.text_col_b: row.get(args.text_col_b, ""),
                         f"{args.text_col_a}_clean": clean_a,
                         f"{args.text_col_b}_clean": clean_b,
-                        f"{args.text_col_a}_tokens": clean_a,
-                        f"{args.text_col_b}_tokens": clean_b,
+                        f"{args.text_col_a}_tokens": tokens_a,
+                        f"{args.text_col_b}_tokens": tokens_b,
                     }
                 )
                 if args.label_col:
@@ -369,14 +384,18 @@ def build_parser() -> argparse.ArgumentParser:
     compare.add_argument("--simhash-bits", type=int, default=64)
     compare.set_defaults(func=handle_compare)
 
-    corpus = subparsers.add_parser("corpus", help="Search a folder for similar documents.")
+    corpus = subparsers.add_parser(
+        "corpus", help="Search a folder for similar documents."
+    )
     corpus.add_argument("--data", required=True)
     corpus.add_argument("--threshold", type=float, default=0.25)
     corpus.add_argument("--shingle-size", type=int, default=3)
     corpus.add_argument("--num-hashes", type=int, default=128)
     corpus.add_argument("--bands", type=int, default=32)
     corpus.add_argument("--output")
-    corpus.add_argument("--use-lsh", action=argparse.BooleanOptionalAction, default=True)
+    corpus.add_argument(
+        "--use-lsh", action=argparse.BooleanOptionalAction, default=True
+    )
     corpus.set_defaults(func=handle_corpus)
 
     pairs = subparsers.add_parser("pairs", help="Evaluate on a labeled pair CSV.")
@@ -385,7 +404,9 @@ def build_parser() -> argparse.ArgumentParser:
     pairs.add_argument("--text-col-b", required=True)
     pairs.add_argument("--label-col")
     pairs.add_argument("--limit", type=int)
-    pairs.add_argument("--method", choices=["jaccard", "minhash", "simhash"], default="simhash")
+    pairs.add_argument(
+        "--method", choices=["jaccard", "minhash", "simhash"], default="simhash"
+    )
     pairs.add_argument("--threshold", type=float, default=0.75)
     pairs.add_argument("--shingle-size", type=int, default=3)
     pairs.add_argument("--num-hashes", type=int, default=128)
