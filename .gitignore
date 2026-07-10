@@ -9,7 +9,7 @@ dist/
 
 # Project specific exclusions
 data/raw/
-data/processed/
+data/preprocessed/
 outputs/*.csv
 outputs/*.json
 
@@ -17,6 +17,5 @@ outputs/*.json
 .DS_Store
 .zed/
 
-# VS Code files for Mehrnia
 .vscode/
 *.code-workspace
