@@ -38,7 +38,7 @@ echo "============================================================"
 # 1. COMPARE  --  near-duplicate pair
 # ------------------------------------------------------------
 echo ""
-echo "[1/5] Comparing doc_01.txt vs doc_02.txt (near-duplicate pair) ..."
+echo "[1/6] Comparing doc_01.txt vs doc_02.txt (near-duplicate pair) ..."
 $CLI compare \
     --file-a       data/sample_corpus/doc_01.txt \
     --file-b       data/sample_corpus/doc_02.txt \
@@ -53,7 +53,7 @@ echo "      -> $OUTPUTS/two_file_compare.json"
 # 2. COMPARE  --  unrelated pair (sanity check)
 # ------------------------------------------------------------
 echo ""
-echo "[2/5] Comparing doc_01.txt vs doc_05.txt (unrelated pair) ..."
+echo "[2/6] Comparing doc_01.txt vs doc_05.txt (unrelated pair) ..."
 $CLI compare \
     --file-a       data/sample_corpus/doc_01.txt \
     --file-b       data/sample_corpus/doc_05.txt \
@@ -72,7 +72,7 @@ echo "      -> $OUTPUTS/two_file_compare_unrelated.json"
 #                       that share ~30 % exact shingles.
 # ------------------------------------------------------------
 echo ""
-echo "[3/5] Scanning sample corpus (brute-force, threshold=0.15) ..."
+echo "[3/6] Scanning sample corpus (brute-force, threshold=0.15) ..."
 $CLI corpus \
     --data         data/sample_corpus \
     --threshold    0.15 \
@@ -90,7 +90,7 @@ PAIRS_CSV="data/raw/questions.csv"
 LIMIT=5000
 
 echo ""
-echo "[4/5] Evaluating $LIMIT pairs -- jaccard (threshold=0.10) ..."
+echo "[4/6] Evaluating $LIMIT pairs -- jaccard (threshold=0.10) ..."
 $CLI pairs \
     --pairs              "$PAIRS_CSV" \
     --text-col-a         question1 \
